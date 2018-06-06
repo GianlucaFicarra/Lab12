@@ -44,6 +44,13 @@ public class River {
 
 	public void setFlows(List<Flow> flows) {
 		this.flows = flows;
+		
+		//per ogni fiume calcolo la media dei flussi
+		double sum=0;
+		for(Flow f: flows) {
+			sum+= f.getFlow();
+		}
+		flowAvg=sum/flows.size();
 	}
 
 	public List<Flow> getFlows() {
