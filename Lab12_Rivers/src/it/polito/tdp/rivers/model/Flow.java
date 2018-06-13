@@ -6,12 +6,15 @@ public class Flow {
 	
 	private LocalDate day;
 	private double flow;
-	//private River river;
+	/*private River river;
+	 * elimino  i riferimenti al fiume tanto dalla query 
+	 * ne analizzo solo 1
+	 */
+
 
 	public Flow(LocalDate day, double flow) {
 		this.day = day;
 		this.flow = flow;
-		//this.river = river;
 	}
 
 	public LocalDate getDay() {
@@ -25,10 +28,10 @@ public class Flow {
 	public double getFlow() {
 		return flow;
 	}
-
-	/*public void setFlow(double flow) {
+	
+	public void setFlow(double flow) {
 		this.flow = flow;
-	}*/
+	}
 
 	@Override
 	public String toString() {

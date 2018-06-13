@@ -50,14 +50,14 @@ public class RiversController {
 
 	public void setModel(Model model) {
 		this.model = model;
-		boxRiver.getItems().addAll(model.getRivers()); 
 		
-		
-		
+		//setto i valori dell tendina
+		boxRiver.getItems().addAll(model.getRivers());		
 	}
 	
     @FXML
     void doRiver(ActionEvent event) {
+    	txtResult.clear();
     	txtStartDate.clear();
  		txtEndDate.clear();
  		txtNumMeasurements.clear();
@@ -69,40 +69,46 @@ public class RiversController {
     		return;
     	}
     	
-    	List<Flow> flussi= model.getFlowByRiver(r);
+    	List<Flow> flussi= model.getFlowByRiver(r);//prende flussi di fiume e li setta
+    	
     	//setto i valori dei campi
         txtStartDate.appendText(String.format("%s", flussi.get(0).getDay()));
 		txtEndDate.appendText(String.format("%s",flussi.get(flussi.size()-1).getDay()));
-		txtNumMeasurements.appendText(Integer.toString(flussi.size()));
+		txtNumMeasurements.appendText(String.format("%d",flussi.size()));
         txtFMed.appendText(String.format("%.2f",r.getFlowAvg()));
     }
 	
+    
     @FXML
     void doSimula(ActionEvent event) {
 
-this.txtResult.clear();
+    txtResult.clear();
     	
     	try {
-    		
+    		//prendo valore fiume
     		River river = this.boxRiver.getValue();
         	
         	if (river == null) {
         		this.txtResult.appendText("Selezionare un fiume!\n");
         		return;
         	}
+        	
+        	
+        	//prendo fattore di proporzionalita e lo controllo
     		double k = Double.parseDouble(this.txtK.getText());
-
-    		if (k > 0) {
+    		
+    		if (k > 0) { //k deve essere espressamente POS, se si avvio simulazione
     			
-    			Simulatore sim = new Simulatore();
+    			Simulatore sim = new Simulatore();//
     			sim.init(k, river);
     			sim.run();
     			this.txtResult.appendText(String.format("Numero di giorni in cui non si è potuta garantire l'erogazione minima: %d\n", sim.getN_giorni()));
     			this.txtResult.appendText(String.format("Occupazione media del bacino: %.3f", sim.getC_med()));
     		
-    		}
+    		} else
+    			this.txtResult.appendText("Inserire k positivo\n");
     		
-    	} catch (NumberFormatException e){
+    	} catch (NumberFormatException e){//gestisce campo vuoto e lettere
     		this.txtResult.appendText("Inserire un valore valido di K!\n");
     	}
     	

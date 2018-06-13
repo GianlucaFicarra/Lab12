@@ -31,7 +31,7 @@ public class Model {
 	public List<Flow> getFlowByRiver(River r){
 		this.fiume=r;
 		this.flussi= dao.getFlussi(fiume);
-		fiume.setFlows(flussi);
+		fiume.setFlows(flussi); //setto flussi e media in fiume
 		return flussi;
 	}
 

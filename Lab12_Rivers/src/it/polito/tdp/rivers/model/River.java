@@ -42,6 +42,7 @@ public class River {
 		this.flowAvg = flowAvg;
 	}
 
+	//setto gli affluenti di un fiume e ne faccio media
 	public void setFlows(List<Flow> flows) {
 		this.flows = flows;
 		
@@ -53,6 +54,7 @@ public class River {
 		flowAvg=sum/flows.size();
 	}
 
+	//flow richiesti dalla simulazione devono essere prima settati
 	public List<Flow> getFlows() {
 		if (flows == null)
 			flows = new ArrayList<Flow>();

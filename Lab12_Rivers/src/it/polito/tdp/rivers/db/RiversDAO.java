@@ -13,6 +13,7 @@ import java.sql.SQLException;
 
 public class RiversDAO {
 
+	//dao ritorna ogni fiume
 	public List<River> getAllRivers() {
 		
 		final String sql = "SELECT id, name FROM river";
@@ -38,6 +39,7 @@ public class RiversDAO {
 		return rivers;
 	}
 
+	//ritorna ogni flusso di un dato fiume
 	public List<Flow> getFlussi(River r) {
 		String sql = "SELECT f.day as giorno, f.flow as flusso " + 
 				"FROM flow as f, river as r " + 
@@ -53,7 +55,7 @@ public class RiversDAO {
 			st.setInt(1, r.getId());
 			ResultSet res = st.executeQuery();
 
-			while (res.next()) {
+			while (res.next()) {       //conversione da Date a LocalDate
 				flussi.add(new Flow(res.getDate("giorno").toLocalDate(), res.getDouble("flusso")));
 			}
 

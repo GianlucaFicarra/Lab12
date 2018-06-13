@@ -15,10 +15,10 @@ public class Main extends Application {
 			
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("Rivers.fxml")) ;
 			BorderPane root = (BorderPane)loader.load();
-			RiversController controller = loader.getController() ;
-		
-
+			
+			// Create and Set the Model
 			Model model = new Model() ;
+			RiversController controller = loader.getController() ;
 			controller.setModel(model) ;
 			
 			Scene scene = new Scene(root);
